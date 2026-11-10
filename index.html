@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Welcome Aboard! | Nandhana Neminathan</title>
+<style>html{color-scheme:dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Layout: plane window -> spinning globe with a side polaroid + postcard note -> business-class seat whose in-flight screen plays the slides */
+:root{--night:#0b0a26;--dusk:#2a1752;--paper:#fbf1d9;--ink:#14121f;--red:#e4572e;--blue:#2e5eaa;--gold:#f2b134;--glow:#fbf36b;--mint:#6fe3d0;--u:10px;
+--script:'Great Vibes','Brush Script MT',cursive;--serif:'Cormorant Garamond',Georgia,serif;--type:'Special Elite','Courier New',monospace;--hand:'Caveat','Comic Sans MS',cursive;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body{margin:0;background:var(--night);color:#fff;font-family:var(--serif);overflow-x:hidden}
+body.pmode{overflow:hidden}
+section{position:relative;min-height:100dvh;overflow:hidden;scroll-snap-align:start}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--glow);outline-offset:2px}
+.btn{background:var(--gold);color:var(--ink);border:3px solid var(--ink);border-radius:6px;padding:7px 14px;box-shadow:3px 3px 0 var(--ink);font-family:var(--type);font-size:.9rem}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+#top{position:fixed;right:max(12px,env(safe-area-inset-right,0px));top:calc(10px + env(safe-area-inset-top,0px));z-index:70;display:flex;gap:8px}
+#toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--gold);color:var(--ink);padding:8px 14px;border-radius:6px;font:.85rem var(--type);z-index:120;max-width:92vw;text-align:center}
+.todo{background:#ffe27a;padding:0 3px;border:1px dashed var(--red)}
+.editing [contenteditable=true]{outline:2px dashed var(--red);outline-offset:2px;cursor:text}
+/* hero */
+#hero{background:#f4a261}
+#plane{position:absolute;inset:0;width:100%;height:100%}
+.cl{animation:dr 40s linear infinite alternate}@keyframes dr{to{transform:translateX(120px)}}
+.ht{position:absolute;left:0;right:0;top:8%;text-align:center;padding:0 16px}
+.ht h1{margin:0;font:400 clamp(3.2rem,11vw,8rem)/1 var(--script);color:#fffbe0;text-shadow:0 0 10px #f3e63a,0 0 34px #f0a419,3px 4px 0 #0005}
+.ht p{margin:6px 0 0;font:italic 700 clamp(1.2rem,3vw,2.1rem) var(--serif);color:#fff;text-shadow:0 2px 10px #000a}
+.dn{position:absolute;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);color:#fff;text-align:center;font:1rem var(--type);text-shadow:0 2px 8px #000;animation:bn 1.6s ease-in-out infinite;background:none;border:0;padding:8px}
+.dn span{display:block;font-size:3rem;line-height:.8}
+@keyframes bn{50%{transform:translate(-50%,10px)}}
+/* globe */
+#globe{background:radial-gradient(ellipse at 70% 20%,var(--dusk),var(--night) 70%);display:flex;flex-direction:column;padding-block:calc(18px + env(safe-area-inset-top,0px)) 84px}
+.stars{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1.5px 1.5px at 20px 30px,#fff,transparent),radial-gradient(1px 1px at 90px 120px,#fff9,transparent),radial-gradient(1.5px 1.5px at 160px 60px,#ffd9ec,transparent);background-size:180px 160px;opacity:.55}
+.gh{position:relative;text-align:center;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.gh h2{margin:0;font:400 clamp(2.4rem,5vw,3.8rem)/1 var(--script);color:var(--glow);text-shadow:0 0 8px #f3e63a,0 0 24px #f0c419}
+.gh p{margin:4px auto 0;max-width:640px;font-size:clamp(.95rem,1.4vw,1.15rem);opacity:.85}
+#gwrap{position:relative;flex:1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center;width:100%;max-width:1500px;margin:0 auto;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
+#gcol{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+#gl{width:min(100%,58vh,560px);aspect-ratio:1;touch-action:none;cursor:grab}
+#chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chip{width:34px;height:34px;border-radius:50%;border:2px solid var(--gold);background:#0b0a26cc;color:#fff;font:700 .95rem var(--type);padding:0}
+.chip.on{background:var(--gold);color:var(--ink)}.chip.sc{border-color:var(--mint)}.chip.sc.on{background:var(--mint)}
+#gname{font:1rem var(--type);color:#d7d8ff;min-height:1.4em;text-align:center}
+#side{min-width:0}
+.detail{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:24px;align-items:start}
+.detail .left{animation:drop .5s ease}
+@keyframes drop{from{opacity:0;transform:translateY(-34px) rotate(7deg)}}
+.pol{margin:0;background:#fff;padding:.7em .7em 0;box-shadow:0 12px 30px #000a;transform:rotate(var(--r,-2deg));position:relative;color:#111;width:100%;font-size:16px}
+.pol:before{content:"";position:absolute;top:-.6em;left:34%;width:32%;height:1.1em;background:#f2b134aa;transform:rotate(-4deg)}
+.pol .pi{overflow:hidden;background:#222}
+.pol img{display:block;width:100%;object-fit:cover;cursor:zoom-in}
+.pol figcaption{font:600 1.35em/1.2 var(--hand);padding:.35em .2em .45em;text-align:center;min-height:2.2em}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.th{width:44px;height:44px;padding:0;border:2px solid #fff6;background:#222;overflow:hidden;border-radius:3px}
+.th img{width:100%;height:100%;object-fit:cover;display:block}.th.on{border-color:var(--gold)}
+.th.add,.rmph{display:none}.th.add{align-items:center;justify-content:center;font-size:1.4rem;background:#ffffff22}
+.editing .th.add{display:flex}.editing .rmph{display:inline-block}
+.note{position:relative;background:var(--paper);color:var(--ink);border:10px solid transparent;border-image:repeating-linear-gradient(135deg,var(--red) 0 12px,var(--paper) 12px 24px,var(--blue) 24px 36px,var(--paper) 36px 48px) 10;padding:14px 18px 16px;box-shadow:0 10px 26px #0008;font-size:clamp(1rem,1.2vw,1.2rem)}
+.note h3{margin:0 0 .35em;font:italic 700 1.75em/1.1 var(--serif)}
+.note .body{font:600 1em/1.45 var(--serif)}.note .body p{margin:0 0 .6em}
+.stamp{position:absolute;right:12px;top:10px;width:66px;height:80px;background:var(--gold);border:3px dotted var(--paper);outline:2px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 .62rem var(--type);color:var(--ink);transform:rotate(3deg)}
+.stamp b{font:700 1.9rem var(--serif)}
+.rs{display:none;margin-top:10px;background:#fff;border:1px solid var(--ink);color:var(--ink);padding:4px 10px;font:.75rem var(--type);border-radius:4px}
+.editing .rs{display:inline-block}
+#globe .dn{bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+/* cabin */
+#cabin{background:#0a0a1c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding-block:calc(16px + env(safe-area-inset-top,0px)) 16px}
+#cabsvg{position:absolute;inset:0;width:100%;height:100%}
+#ifewrap{position:relative;width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+#ife{width:100%}
+.scr{position:relative;aspect-ratio:16/10;background:#05050f;border:clamp(8px,1.1vw,16px) solid #090910;border-radius:clamp(10px,1.6vw,22px);box-shadow:0 0 0 2px #2b2b44,0 0 90px #6a4cff55,inset 0 0 40px #000;overflow:hidden;display:flex;flex-direction:column}
+.ifeb{flex:none;display:flex;align-items:center;gap:calc(var(--u)*1.2);padding:0 calc(var(--u)*1.6);height:calc(var(--u)*4.6);background:linear-gradient(#1a1840,#0e0d28);color:#d7d8ff;font:calc(var(--u)*var(--t,1)*1.2) var(--type)}
+.ifeb .sp{flex:1}
+.ib{background:#ffffff14;border:1px solid #ffffff44;color:#fff;border-radius:calc(var(--u)*1.2);padding:calc(var(--u)*.4) calc(var(--u)*1.3);font:calc(var(--u)*var(--t,1)*1.15) var(--type)}
+.ib:hover{background:#ffffff33}
+.trk{position:relative;flex:1;height:calc(var(--u)*.5);background:#ffffff22;border-radius:9px}
+.trk i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#ff9ecb,#ffd54a);border-radius:9px;transition:width .5s}
+.pln{position:absolute;top:50%;transform:translate(-50%,-58%);font-size:calc(var(--u)*var(--t,1)*1.8);transition:left .5s;color:#fff}
+#slide{position:relative;flex:1;min-height:0;background:var(--paper);color:var(--ink);border:calc(var(--u)*.8) solid transparent;border-image:repeating-linear-gradient(135deg,var(--red) 0 12px,var(--paper) 12px 24px,var(--blue) 24px 36px,var(--paper) 36px 48px) 12}
+.sl{position:absolute;inset:0;display:flex;flex-direction:column;gap:calc(var(--u)*.7);padding:calc(var(--u)*.7) calc(var(--u)*1.8) calc(var(--u)*.6);overflow:auto;animation:sin .35s ease}
+@keyframes sin{from{opacity:0;transform:translateX(24px)}}
+.sh{flex:none;display:flex;align-items:center;justify-content:space-between;gap:calc(var(--u)*2)}
+.st{margin:0;font:400 calc(var(--u)*var(--t,1)*4.1)/1.05 var(--script);color:#2b1d5e;text-shadow:calc(var(--u)*.15) calc(var(--u)*.15) 0 #f2b13499}
+.tagc{flex:none;font:calc(var(--u)*var(--t,1)*1.15) var(--type);border:2px solid var(--red);color:var(--red);padding:.25em .7em;border-radius:3px;transform:rotate(-3deg);background:#fff9;white-space:nowrap}
+.sb{flex:1;min-height:0;display:flex;flex-direction:column;gap:calc(var(--u)*1.2)}
+.sf{flex:none;display:none;position:relative;z-index:3}.editing .sf{display:block}
+.two{display:grid;grid-template-columns:minmax(0,var(--a,1.5fr)) minmax(0,var(--b,1fr));gap:calc(var(--u)*2.2);align-items:start}
+.three{display:grid;grid-template-columns:minmax(0,var(--a,1fr)) minmax(0,var(--b,1fr)) minmax(0,var(--c,1fr));gap:calc(var(--u)*2);align-items:start}
+.txt{font:600 calc(var(--u)*var(--t,1)*1.42)/1.33 var(--serif);color:var(--ink)}
+.txt p{margin:0 0 .5em}.txt ul,.txt ol{margin:.2em 0 .5em;padding-left:1.15em}.txt li{margin:.15em 0}
+.txt h3{margin:0 0 .25em;font:italic 700 calc(var(--u)*var(--t,1)*1.95)/1.1 var(--serif);color:#2b1d5e}
+.txt .lead{font-size:1.15em;font-style:italic}.sm{font-size:.8em;opacity:.8}
+.sl .pol{font-size:calc(var(--u)*1.25)}
+.pc{display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*1.4)}
+.pc.prow{flex-direction:row;align-items:flex-start}.pc.prow .pol{flex:1;min-width:0}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:calc(var(--u)*1.2)}
+.stp{background:#fff;border:2px solid #2b1d5e22;border-top:calc(var(--u)*.45) solid var(--blue);padding:calc(var(--u)*.8) calc(var(--u)*1);font:600 calc(var(--u)*var(--t,1)*1.2)/1.3 var(--serif);position:relative}
+.stp b{display:block;font:italic 700 calc(var(--u)*var(--t,1)*1.5)/1.1 var(--serif);color:var(--blue);margin-bottom:.2em}
+.stp i{position:absolute;right:calc(var(--u)*.6);top:calc(var(--u)*.4);font:700 calc(var(--u)*var(--t,1)*1.2) var(--type);font-style:normal;color:var(--red)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*1.1)}
+.stat{background:#fff;border:2px dotted #2b1d5e55;padding:calc(var(--u)*.8);font:600 calc(var(--u)*var(--t,1)*1.12)/1.25 var(--serif)}
+.stat b{display:block;font:700 calc(var(--u)*var(--t,1)*3.3)/1 var(--serif);color:var(--red)}
+.src{font:calc(var(--u)*var(--t,1)*.95)/1.3 var(--type);opacity:.75;margin:0}
+.rstage{position:relative;width:100%;aspect-ratio:2/1;margin:0 auto;flex:none}
+.rcrop{position:absolute;top:0;height:100%;overflow:hidden;box-shadow:0 6px 18px #0006;background:#fff}.rstage .rimg{position:absolute;left:0;width:100%;object-fit:fill;box-shadow:0 6px 18px #0006;cursor:zoom-in;background:#fff}
+.rstage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.co{position:absolute;background:#fff;border-top:calc(var(--u)*.45) solid var(--c);box-shadow:0 6px 16px #0003;padding:calc(var(--u)*.6) calc(var(--u)*.9);font:600 calc(var(--u)*var(--t,1)*1.1)/1.27 var(--serif);color:var(--ink);overflow:auto}
+.co b{display:block;font:italic 700 calc(var(--u)*var(--t,1)*1.45)/1.1 var(--serif);color:var(--c);margin-bottom:.15em}
+.hintz{font:calc(var(--u)*var(--t,1)*1.05) var(--type);opacity:.7}
+.tbl{width:100%;border-collapse:collapse;font:600 calc(var(--u)*var(--t,1)*1.2)/1.3 var(--serif)}
+.tbl th{font:calc(var(--u)*var(--t,1)*1.05) var(--type);text-align:left;color:var(--red);padding:calc(var(--u)*.3) calc(var(--u)*.8)}
+.tbl td{background:#fff;padding:calc(var(--u)*.6) calc(var(--u)*.8);border-top:calc(var(--u)*.3) solid var(--paper);vertical-align:top}
+.tbl td:first-child{font-weight:700;color:#2b1d5e}
+.rows{display:grid;gap:calc(var(--u)*.7)}
+.row{background:#fff;padding:calc(var(--u)*.6) calc(var(--u)*.9);font:600 calc(var(--u)*var(--t,1)*1.2)/1.3 var(--serif);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2fr);gap:calc(var(--u)*1)}
+.row b{font-style:italic;color:#2b1d5e}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*1)}
+.grid2 .gi{overflow:hidden;border:calc(var(--u)*.4) solid #fff;box-shadow:0 4px 12px #0004;background:#222}.grid2 img{display:block;width:100%;aspect-ratio:1;object-fit:cover;cursor:zoom-in}
+#menu{position:absolute;left:0;right:0;top:calc(var(--u)*4.6);bottom:calc(var(--u)*4.6);background:#05051af5;display:none;padding:calc(var(--u)*1.6);overflow:auto;z-index:5}
+#menu.show{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(var(--u)*1);align-content:start}
+#menu button{background:linear-gradient(135deg,#3a2f9a66,#ffffff0d);box-shadow:inset 0 0 0 1px #ffffff2a;border:0;min-height:calc(var(--u)*6);background-clip:padding-box;border-radius:calc(var(--u)*.8);padding:calc(var(--u)*.8) calc(var(--u)*1.1);text-align:left;color:#fff;font:calc(var(--u)*var(--t,1)*1.3) var(--serif)}
+#menu button.x{background:#ffffff12;border:1px solid #ffffff3a;border-radius:calc(var(--u)*.8);padding:calc(var(--u)*.8) calc(var(--u)*1.1);text-align:left;color:#fff;font:calc(var(--u)*var(--t,1)*1.3) var(--serif)}
+#menu button small{display:block;font:calc(var(--u)*var(--t,1)*.95) var(--type);color:#ffd54a}
+#menu button:hover,#menu button.on{background:#ffffff30}
+#hint{font:.85rem var(--type);color:#b9bbea;text-align:center}
+.pmode #ife{position:fixed;inset:0;z-index:60;width:100vw;background:#000;display:flex;align-items:center;justify-content:center}
+.pmode .scr{width:min(100vw,160dvh);border-width:0;border-radius:0;box-shadow:none}
+.pmode #hint{display:none}
+#ife{position:relative}
+#ife:before{content:"";position:absolute;top:calc(clamp(8px,1.1vw,16px)/2 - 3px);left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#12204a;box-shadow:0 0 5px #3b6cff;z-index:3}
+.scr{background:radial-gradient(ellipse at 50% 0,#1b1a55,#07061c 70%)}
+.scr:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:linear-gradient(115deg,#ffffff1c 0,#ffffff08 28%,transparent 29%,transparent 100%)}
+.ifeb{border-bottom:1px solid #6a6cff55}.ifeb:last-of-type{border-top:1px solid #6a6cff55;border-bottom:0}
+.pill{background:#ffffff14;border:1px solid #ffffff2e;border-radius:99px;padding:calc(var(--u)*.3) calc(var(--u)*1);color:#ffd54a;font:calc(var(--u)*var(--t,1)*1.05) var(--type)}
+.mid{flex:1;min-height:0;display:flex;padding:calc(var(--u)*.9) calc(var(--u)*1.2);background:radial-gradient(ellipse at 50% 100%,#3a2a8a55,transparent 70%)}
+.mid #slide{box-shadow:0 0 0 1px #ffffff33,0 10px 30px #000a;border-radius:calc(var(--u)*.5)}
+.hbar{width:min(520px,60%);height:5px;border-radius:5px;background:#ffffff30;margin:2px auto 0}
+.xr{display:flex;gap:calc(var(--u)*1.2);flex-wrap:wrap}.xr .pol{width:calc(var(--u)*14);font-size:calc(var(--u)*1)}
+.editing img[data-ph],.editing .pol img{outline:3px dashed var(--red);outline-offset:-3px;cursor:pointer}
+.pol .pi{position:relative}
+.mvh{display:none;position:absolute;left:.5em;top:.5em;z-index:4;background:var(--glow);color:var(--ink);font:.72em var(--type);padding:.3em .8em;border-radius:99px;cursor:grab;touch-action:none;box-shadow:0 2px 6px #0007;user-select:none}
+.editing .mvh{display:block}.mvh:active{cursor:grabbing}
+.pc{position:relative}.bigstamp{position:absolute;right:calc(var(--u)*-.8);top:calc(var(--u)*-1.6);width:calc(var(--u)*8.5);height:calc(var(--u)*10.5);transform:rotate(7deg);background:#fff;border:calc(var(--u)*.7) dotted var(--paper);box-shadow:0 4px 10px #0004;padding:calc(var(--u)*.5);z-index:1}
+.bigstamp .in{height:100%;overflow:hidden;line-height:1.15;background:linear-gradient(160deg,#2e5eaa,#1b2b6b);border:2px solid #f2b134;color:#ffe9a8;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:calc(var(--u)*.6) calc(var(--u)*.4);font:calc(var(--u)*var(--t,1)*.7) var(--type)}
+.bigstamp .pl{font-size:calc(var(--u)*var(--t,1)*3);line-height:1;color:#fff}
+.bigstamp b{font:700 calc(var(--u)*var(--t,1)*1.8)/1 var(--serif);color:#f2b134}
+.pm{position:absolute;right:calc(var(--u)*5.5);top:calc(var(--u)*1);width:calc(var(--u)*7);height:calc(var(--u)*7);border:calc(var(--u)*.22) solid #b0332d;border-radius:50%;color:#b0332d;display:flex;align-items:center;justify-content:center;text-align:center;font:700 calc(var(--u)*var(--t,1)*.85)/1.25 var(--type);transform:rotate(-14deg);opacity:.75;z-index:2;pointer-events:none}
+.pm:before,.pm:after{content:"";position:absolute;right:100%;width:calc(var(--u)*7);height:calc(var(--u)*.2);background:#b0332d;box-shadow:0 calc(var(--u)*.8) #b0332d,0 calc(var(--u)*1.6) #b0332d}
+.pm:before{top:30%}.pm:after{display:none}
+.editing .pol .pi:after{content:"Click to edit photo";position:absolute;left:50%;bottom:8px;transform:translateX(-50%);background:var(--red);color:#fff;font:.7em var(--type);padding:.3em .8em;border-radius:99px;pointer-events:none;white-space:nowrap}
+#ptb{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:110;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;background:#14121f;border:2px solid var(--glow);border-radius:12px;padding:8px 10px;max-width:96vw;box-shadow:0 8px 24px #000a}
+#ptb button{background:#fff;color:var(--ink);border:0;border-radius:6px;padding:6px 10px;font:.85rem var(--type)}
+#ptb .tip{flex-basis:100%;text-align:center;color:#d7d8ff;font:.72rem var(--type)}
+.editing .pol img,.editing .gi img{touch-action:none}
+.editing img.sel{outline:3px solid #fbf36b!important;outline-offset:-3px;cursor:move!important}
+#lb{position:fixed;inset:0;z-index:100;background:#000d;display:none;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}
+#lb.show{display:flex}#lb img{max-width:100%;max-height:100%;object-fit:contain;background:#fff}
+@media (max-width:760px){
+ .bigstamp,.pm{display:none}
+ #gwrap,.detail{grid-template-columns:1fr}
+ #ife{width:100%}.scr{height:100%}
+ .two,.three,.steps,.stats,.row{grid-template-columns:1fr!important}
+ .rstage{aspect-ratio:auto;width:100%;display:flex;flex-direction:column;gap:10px}
+ .rcrop{position:static;width:100%!important;height:auto}.rstage .rimg{position:static;height:auto!important}.rstage svg{display:none}
+ .co{position:static;width:100%!important;height:auto!important}
+ #menu.show{grid-template-columns:1fr}.tbl{display:block;overflow-x:auto}
+ .st{font-size:calc(var(--u)*var(--t,1)*5.2)}
+}
+@media (prefers-reduced-motion:reduce){.cl,.dn,.sl,.detail .left{animation:none}html{scroll-behavior:auto}}
+/* full-screen slide section */
+#cabin{padding:0;gap:0;justify-content:stretch;align-items:stretch;height:100dvh;background:#05051a}
+#cabsvg,#hint,.hbar,#ife:before,.scr:after,#bpm{display:none!important}
+#ifewrap{height:100%;padding:0;gap:0;align-items:stretch}
+#ife{width:100%!important;height:100%;position:static}
+.scr{aspect-ratio:auto!important;height:100%;border:0!important;border-radius:0!important;box-shadow:none!important}
+.scr>.ifeb:first-child{padding-right:calc(var(--u)*10)}
+.cmp .stat b{font-size:calc(var(--u)*var(--t,1)*2.3)}.cmp .stats{gap:calc(var(--u)*.8)}.cmp .stat{padding:calc(var(--u)*.6) calc(var(--u)*.8);font-size:calc(var(--u)*var(--t,1)*1)}.cmp .txt{font-size:calc(var(--u)*var(--t,1)*1.2)}.cmp .tbl{font-size:calc(var(--u)*var(--t,1)*1.1)}.cmp .pc.prow .pol{font-size:calc(var(--u)*.95);flex:none}.cmp .pc.prow{justify-content:center}
+.ifeb,.ifeb *{white-space:nowrap}.ifeb #nowp{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.hrs{flex:none;display:flex;align-items:center;gap:calc(var(--u)*1.4);background:#fff;border:2px dotted #2b1d5e55;border-left:calc(var(--u)*.6) solid var(--red);padding:calc(var(--u)*.6) calc(var(--u)*1.2)}.hrs b{font:700 calc(var(--u)*var(--t,1)*3.4)/1 var(--serif);color:var(--red)}.hrs span{font:600 calc(var(--u)*var(--t,1)*1.4)/1.3 var(--serif)}
+#fmt{display:none;gap:8px}.editing #fmt{display:flex}.txt b,.note .body b,.co b{font-weight:700}.txt b,.note .body b{color:#2b1d5e}.txt i,.note .body i{font-style:italic}
+b.em{font-weight:800;color:#2b1d5e;-webkit-text-stroke:.035em currentColor}.note b.em{color:#14121f}
+.editing .scr>.ifeb:first-child{padding-right:calc(var(--u)*20)}
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:calc(var(--u)*.8);align-items:start}.pgrid .pol{font-size:calc(var(--u)*.6);--r:-1.5deg;width:auto}.pgrid .pol figcaption{font-size:1.5em;min-height:0}.yt{font-size:calc(var(--u)*var(--t,1)*1.15)}.yt p{margin:0 0 .45em}
+.id3{grid-template-columns:repeat(3,minmax(0,1fr))!important}.id3 .pol{font-size:calc(var(--u)*.85)!important}
+.xdel{display:none;position:absolute;right:.3em;top:.3em;z-index:5;background:#b0332d;color:#fff;border:0;border-radius:99px;padding:.3em .8em;font:.8em var(--type)}.editing .xdel{display:block}.xr .pol{position:relative}
+.ycards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:calc(var(--u)*1.2)}.yc{background:#fff;border-top:calc(var(--u)*.45) solid var(--blue);box-shadow:0 4px 12px #0002;padding:calc(var(--u)*.8) calc(var(--u)*1)}.yc:nth-child(2){border-color:var(--red)}.yc:nth-child(3){border-color:#2f8f5b}.yc:nth-child(4){border-color:#8a4fbf}.yc h3{margin:0 0 .3em;font:italic 700 calc(var(--u)*var(--t,1)*1.7)/1.1 var(--serif);color:#2b1d5e}.yc p{margin:0;font:600 calc(var(--u)*var(--t,1)*1.12)/1.35 var(--serif)}.ypg{grid-template-columns:repeat(9,minmax(0,1fr))!important}.ypg .pol{font-size:calc(var(--u)*.55)!important}
+.yg3{grid-template-columns:repeat(3,minmax(0,1fr))!important}.yg3 .pol{font-size:calc(var(--u)*.68)!important}
+.pl3{grid-template-columns:repeat(3,minmax(0,1fr))!important}.mp{margin:0;font:italic 700 calc(var(--u)*var(--t,1)*1.95)/1.1 var(--serif);color:#2b1d5e}
+.co.sm{font-size:calc(var(--u)*var(--t,1)*.9)}.co.sm b{font-size:1.15em}.pl3 .stp{font-size:calc(var(--u)*var(--t,1)*1.05)}.pl3 .stp b{font-size:calc(var(--u)*var(--t,1)*1.3)}
+.flow{position:relative;width:100%;aspect-ratio:1000/400;flex:none}.flow svg{z-index:2;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.fc{position:absolute;background:#fff;border:2px solid #2b1d5e33;border-top:calc(var(--u)*.45) solid var(--blue);box-shadow:0 4px 10px #0002;padding:calc(var(--u)*.5) calc(var(--u)*.8);font:600 calc(var(--u)*var(--t,1)*.84)/1.22 var(--serif);overflow:auto;z-index:1}.fc h4{margin:0 0 .2em;font:italic 700 calc(var(--u)*var(--t,1)*1.2)/1.1 var(--serif);color:var(--blue);text-align:center}.fc p{margin:0 0 .25em}.fc ul{margin:0 0 .3em;padding-left:1.1em}.fc .cap{text-align:center;font-weight:700;color:#2b1d5e}.fc .dk{background:#232a40;color:#fff;margin:0;padding:.4em;text-align:center}.fc:has(.dk){padding:0;border-top-color:#232a40;background:#232a40}
+.refs{flex:none;font:calc(var(--u)*var(--t,1)*.82)/1.3 var(--type);opacity:.85}.fc sup{font-size:.7em;color:var(--red);font-weight:700;margin-left:.15em}
+</style>
+
+<!-- v2: polaroid stops + in-flight screen slides -->
+<section id="hero" aria-label="Welcome">
+<svg id="plane" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The side of an airplane with a row of windows, flying at sunset">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26357d"/><stop offset=".45" stop-color="#e76f8a"/><stop offset="1" stop-color="#ffd29a"/></linearGradient><linearGradient id="fu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#d7deea"/><stop offset="1" stop-color="#9fabc2"/></linearGradient></defs>
+<rect width="1200" height="700" fill="url(#sky)"/>
+<g fill="#fff" opacity=".55" class="cl"><ellipse cx="180" cy="560" rx="200" ry="34"/><ellipse cx="900" cy="620" rx="260" ry="40"/><ellipse cx="1050" cy="130" rx="150" ry="22"/><ellipse cx="260" cy="110" rx="120" ry="18"/></g>
+<path d="M-40 250Q600 170 1240 250L1240 520Q600 600 -40 520Z" fill="url(#fu)"/>
+<path d="M-40 455Q600 535 1240 455" stroke="#e4572e" stroke-width="12" fill="none"/><path d="M-40 475Q600 555 1240 475" stroke="#2e5eaa" stroke-width="5" fill="none"/>
+<text x="600" y="318" text-anchor="middle" font-family="Special Elite, Courier New, monospace" font-size="26" letter-spacing="10" fill="#2e5eaa">NANDHANA’S PORTFOLIO AIRLINES</text>
+<g id="wn"></g>
+<path d="M760 560L1120 700H1240V610L930 545Z" fill="#9fabc2"/>
+</svg>
+<div class="ht"><h1>Welcome Aboard!</h1><p>We’re happy to have you here</p></div>
+<button class="dn" data-go="globe" aria-label="Scroll down to the globe">Scroll down<span>⌄</span></button>
+</section>
+
+<section id="globe" aria-label="Flight log globe">
+<div class="stars"></div>
+<div class="gh"><h2>My Flight Log</h2><p>Ten stops so far. Drag the globe to spin it, then tap a numbered dot to see my photo and read about it.</p></div>
+<div id="gwrap">
+ <div id="gcol"><canvas id="gl" aria-label="Interactive globe with 10 numbered travel stops"></canvas><div id="chips" role="group" aria-label="Travel stops"></div><div id="gname"></div></div>
+ <div id="side"><div class="detail" id="detail"></div></div>
+</div>
+<button class="dn" data-go="cabin" aria-label="Scroll down to your seat">Scroll to your seat<span>⌄</span></button>
+</section>
+
+<section id="cabin" aria-label="In-flight presentation">
+<svg id="cabsvg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#17153d"/><stop offset="1" stop-color="#07071a"/></linearGradient>
+<radialGradient id="sun" cx=".5" cy=".6" r=".7"><stop offset="0" stop-color="#ffb36b"/><stop offset=".6" stop-color="#d2589a"/><stop offset="1" stop-color="#3b2a7a"/></radialGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9b0" stop-opacity=".28"/><stop offset="1" stop-color="#ffe9b0" stop-opacity="0"/></linearGradient>
+<filter id="bl"><feGaussianBlur stdDeviation="16"/></filter></defs>
+<rect width="1600" height="1000" fill="url(#wall)"/>
+<rect x="0" y="26" width="1600" height="10" fill="#ff7ac8" filter="url(#bl)" opacity=".85"/><rect x="0" y="30" width="1600" height="3" fill="#ffc4ea"/>
+<polygon points="120,40 40,40 -60,820 300,820" fill="url(#beam)"/>
+<path d="M0 0H190L120 1000H0Z" fill="#0d0c28"/><path d="M1600 0H1410L1480 1000H1600Z" fill="#0d0c28"/>
+<g transform="translate(1455 230)"><rect x="-70" y="-10" width="210" height="340" rx="105" fill="#0a0a18" stroke="#2f2f4c" stroke-width="12"/><rect x="-52" y="8" width="174" height="304" rx="87" fill="url(#sun)"/></g>
+<path d="M60 1000Q800 880 1540 1000Z" fill="#100f26"/><rect x="0" y="940" width="1600" height="60" fill="#0a0a1c"/>
+<rect x="150" y="930" width="1300" height="5" rx="2.5" fill="#3a3a66" opacity=".7"/>
+</svg>
+<div id="ifewrap">
+ <div id="ife"><div class="scr" id="scr">
+  <div class="ifeb"><span>✈ NANDHANA’S PORTFOLIO AIRLINES</span><span class="pill">PC 101</span><span class="sp"></span><span id="nowp"></span><span class="sp"></span><span class="pill" id="clk"></span><button class="ib" id="tsm" aria-label="Smaller text">A−</button><button class="ib" id="tsp" aria-label="Bigger text">A+</button><button class="ib" id="tsa" title="Apply text size to all slides">This slide</button><button class="ib" id="bmenu">Menu</button><button class="ib" id="bpm">Present</button></div>
+  <div class="mid"><div id="slide" aria-live="polite"></div></div>
+  <div class="ifeb"><button class="ib" id="bpv" aria-label="Previous slide">◀ Prev</button><div class="trk"><i id="trki"></i><span class="pln" id="pln">✈</span></div><span id="cnt"></span><button class="ib" id="bnx" aria-label="Next slide">Next ▶</button></div>
+  <div id="menu"></div><div class="hbar"></div>
+ </div></div>
+ <div id="hint">Use the ← → keys or the buttons. Menu jumps to any slide. Present fills the screen.</div>
+</div>
+</section>
+
+<div id="top"><span id="fmt"><button class="btn" data-c="bold" title="Bold (Ctrl or Cmd + B)"><b>B</b></button><button class="btn" data-c="italic" title="Italic (Ctrl or Cmd + I)"><i>I</i></button></span><button class="btn" id="ed">✎ Edit</button></div>
+<div id="toast" hidden></div>
+<div id="ptb" hidden><button data-a="zi">Zoom in ＋</button><button data-a="zo">Zoom out －</button><button data-a="rl">↺ 5°</button><button data-a="rr">↻ 5°</button><button data-a="r90">↻ 90°</button><button data-a="rs">Reset</button><button data-a="rp">Replace photo</button><button data-a="dn">Done</button><span class="tip">Drag the photo to move it inside the frame. Use the yellow ✥ Move tab to move the whole polaroid (double-click it to reset).</span></div>
+<div id="lb"><img alt=""></div>
+<input type="file" id="fi" accept="image/*" hidden>
+
+<script>
+const IM={"ban": "images/ban.jpg", "blr": "images/blr.jpg", "camp": "images/camp.jpg", "cp1": "images/cp1.jpg", "cp2": "images/cp2.jpg", "cp3": "images/cp3.jpg", "cr": "images/cr.jpg", "dr": "images/dr.jpg", "dub": "images/dub.jpg", "egy": "images/egy.jpg", "farm": "images/farm.jpg", "flag": "images/flag.jpg", "future": "images/future.jpg", "goat": "images/goat.jpg", "grp": "images/grp.jpg", "hi": "images/hi.jpg", "i1": "images/i1.jpg", "i2": "images/i2.jpg", "i3": "images/i3.jpg", "i4": "images/i4.jpg", "jp1": "images/jp1.jpg", "jp2": "images/jp2.jpg", "lon": "images/lon.jpg", "meet": "images/meet.jpg", "mex": "images/mex.jpg", "n1": "images/n1.jpg", "n3": "images/n3.jpg", "n4": "images/n4.jpg", "py68": "images/py68.jpg", "resume": "images/resume.jpg", "s10": "images/s10.jpg", "s11": "images/s11.jpg", "s12": "images/s12.jpg", "s13": "images/s13.jpg", "s14": "images/s14.jpg", "s15": "images/s15.jpg", "sa": "images/sa.jpg", "seat": "images/seat.jpg", "sign": "images/sign.jpg", "tal": "images/tal.jpg", "teach": "images/teach.jpg", "y1": "images/y1.jpg", "y2": "images/y2.jpg", "y3": "images/y3.jpg", "y4": "images/y4.jpg", "y5": "images/y5.jpg", "y6": "images/y6.jpg"};
+const LAND='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAD8AAAAAAAAAAAAAAAAAAAAAAAAH/z///gAAAAAAAAAAAAAAAAAAAAAAAP+f///wAAAAAAAAAAAAAAAAAAAAAAAGAf///4AAAAAAAAAGAAAAAAAAAAAAAAAAf//4AAAAAAAAH/gAAAAAAAAAAAQAYAP//wAAAAAAAf///gAAAAABwAAf77/AP//gAAAAAAB//////4AAAP//+P///4H/8AAAH+AA/////////8Af//////f+H/gAAAf/////////////Af//////n8D/A+AB+/////////////Af/////+A4B+AAAH9////////////8AP/////wGAAYAAAH5////////////wADgP///gH8AAAAAA4///////////4AACAB///gH+AAAAGCx/////////4A4AAAAA///+P/AAAADCD/////////wA4AAAAAf///v/gAAAbn//////////4AwAAAAAP/////wAAAH///////////8AAAAAAAB/////gAAAD///////////8AAAAAAAD/////AAAAB///////////4AAAAAAAD////4AAAAD//5f///////wAAAAAAAD////gAAAAPgvwH///////DAAAAAAAD////AAAAAPgbn///////8AAAAAAAAD///+AAAAAPAJf///////mCAAAAAAAB///8AAAAAOAAP//////+GEAAAAAAAA///8AAAAAH+AA///////E8AAAAAAAAf//4AAAAAP/AB///////BAAAAAAAAAH//gAAAAAf/75///////gAAAAAAAAAD/gwAAAAAf//9/P/////gAAAAAAAAAB/AQAAAAB///+/j/////AAAAAAAAAAA+AAAAAAB///+/wH///+AAAAAAAAAAAeAAAAAAD////f+D///8gAAAAAAAAAAfEEAAAAH////v+A/z/QAAAAAAAAAAAPEBgAAAD////v8A/h+AAAAAAAAAAAAD8AAAAAD////34AeB/AgAAAAAAAAAAAfAAAAAD/////gAcAfAwAAAAAAAAAAADAAAAAD////6AAMAfAQAAAAAAAAAAABB4AAAD/////wAMAXAAAAAAAAAAAAAAz+AAAB/////gAAASAIAAAAAAAAAAAAH/gAAA/////gACAAAYAAAAAAAAAAAAH/8AAAMD///AAAAICAAAAAAAAAAAAAH/8AAAAB//+AAAAQOAAAAAAAAAAAAAH/+AAAAB//8AAAAYeAAAAAAAAAAAAAP//AAAAD//4AAAAMeBAAAAAAAAAAAAP//4AAAB//wAAAAGcAGAAAAAAAAAAAP///AAAA//wAAAACAAPgAAAAAAAAAAP///AAAA//wAAAABgAHwAAAAAAAAAAP///AAAA//wAAAAAAAAwAAAAAAAAAAH///AAAAf/wAAAAAAAAAAAAAAAAAAAD//+AAAA//wgAAAAABxAAAAAAAAAAAB//8AAAA//xgAAAAAP7AAAAAAAAAAAA//8AAAA//DgAAAAAf7gAAAAAAAAAAAf/8AAAA//DAAAAAB//gAAAAAAAAAAAf/8AAAAf/DAAAAAD//wAAAAAAAAAAAf/4AAAAf+DAAAAAH//4AAAAAAAAAAA//gAAAAf+AAAAAAH//+AAAAAAAAAAA//AAAAAf8AAAAAAH//+AAAAAAAAAAA/+AAAAAP8AAAAAAH//+AAAAAAAAAAA/+AAAAAH4AAAAAAH//+AAAAAAAAAAA/8AAAAAHwAAAAAAH4/8AAAAAAAAAAA/gAAAAAAAAAAAAAAAH8AAAAAAAAAAB/gAAAAAAAAAAAAAAAD4AEAAAAAAAAB+AAAAAAAAAAAAAAAAAAAGAAAAAAAAB4AAAAAAAAAAAAAAAAAAAMAAAAAAAAB8AAAAAAAAAAAAAAAAAAAQAAAAAAAAB8AAAAAAAAAAAAAAAAAAAgAAAAAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+AAAAAAAAAAAAAAAAAAAAAAAAAAAAA//4AAAAAAA//////8AAAAAAAAAAAAA////gAD/////////////AAAAAAAAB///////////////////////4AAAP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+(()=>{const wn=$('#wn');let h='';for(let i=0;i<10;i++){const x=90+i*113,y=372+Math.pow((x-600)/600,2)*22;h+=`<ellipse cx="${x}" cy="${y}" rx="27" ry="37" fill="#1b2342" stroke="#c5cde0" stroke-width="7"/><ellipse cx="${x-8}" cy="${y-12}" rx="6" ry="12" fill="#fff" opacity=".25"/>`}wn.innerHTML=h})();
+$$('[data-go]').forEach(b=>b.onclick=()=>$('#'+b.dataset.go).scrollIntoView({behavior:'smooth'}));
+
+/* ---------- storage: browser first, mirrored to the owner's db and assets when available ---------- */
+const KV={};let ED=false,DB=null,AS=null,warned=false;const tm={};
+const lsg=k=>{try{return localStorage.getItem('pc:'+k)}catch(e){return null}};
+const lss=(k,v)=>{try{localStorage.setItem('pc:'+k,v);return true}catch(e){return false}};
+const lsd=k=>{try{localStorage.removeItem('pc:'+k)}catch(e){}};
+const gid=k=>k.replace(/[^A-Za-z0-9]/g,'_');
+const g=k=>(k in KV)?KV[k]:lsg(k);
+function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,4200)}
+function sv(k,v){KV[k]=v;if(!lss(k,v)&&!warned){warned=true;toast('This browser is out of storage. Remove a photo to keep saving edits.')}
+ if(DB&&!String(v).startsWith('data:')){clearTimeout(tm[k]);tm[k]=setTimeout(()=>DB.doc('edits/'+gid(k)).set({k,v}).catch(()=>{}),600)}}
+function rmk(k){KV[k]=null;lsd(k);if(DB)DB.doc('edits/'+gid(k)).delete().catch(()=>{})}
+function keysWith(p){const s=new Set(Object.keys(KV).filter(k=>KV[k]!=null));try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('pc:'))s.add(k.slice(3))}}catch(e){}return [...s].filter(k=>k.includes(p))}
+function resetScope(sc){keysWith(':'+sc+':').forEach(rmk);keysWith(':'+sc).filter(k=>k.startsWith('ex:')).forEach(rmk)}
+async function shrink(file,mx){const url=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(file)});const im=await new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=url});const q=Math.min(1,mx/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*q);c.height=Math.round(im.height*q);c.getContext('2d').drawImage(im,0,0,c.width,c.height);return new Promise(r=>c.toBlob(b=>r(b),'image/jpeg',.78))}
+const blobUrl=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b)});
+function pick(cb,mx=900){const fi=$('#fi');fi.value='';fi.onchange=async()=>{const f=fi.files[0];if(!f)return;const b=await shrink(f,mx);let u=null;if(AS){try{u=(await AS.upload(b)).url}catch(e){u=null}}if(!u)u=await blobUrl(b);cb(u)};fi.click()}
+function zoom(src){$('#lb img').src=src;$('#lb').classList.add('show')}
+$('#lb').onclick=()=>$('#lb').classList.remove('show');
+let SEL=null;
+const FD={z:1,r:0,x:0,y:0};
+const getF=im=>{try{return Object.assign({},FD,JSON.parse(g(im._fk)||'{}'))}catch(e){return {...FD}}};
+function applyF(im){const f=getF(im),a=f.r*Math.PI/180,s=f.z*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));im.style.transform=(f.x||f.y||f.r||f.z!=1)?`translate(${f.x}%,${f.y}%) rotate(${f.r}deg) scale(${s})`:''}
+const saveF=(im,f)=>{sv(im._fk,JSON.stringify(f));applyF(im)};
+function selImg(im){if(SEL)SEL.classList.remove('sel');SEL=im;if(im)im.classList.add('sel');$('#ptb').hidden=!(im&&ED)}
+function fxBind(im,fk,rep){im._fk=fk;im._rep=rep;applyF(im);im.onclick=e=>{if(!ED)return zoom(im.src);e.stopPropagation();selImg(im)};
+ let d=null;im.onpointerdown=e=>{if(!ED||SEL!==im)return;e.preventDefault();im.setPointerCapture(e.pointerId);const f=getF(im);im._tmp=null;d={x:e.clientX,y:e.clientY,f,w:im.offsetWidth||1,h:im.offsetHeight||1}};
+ im.onpointermove=e=>{if(!d)return;const f={...d.f,x:d.f.x+(e.clientX-d.x)/d.w*100,y:d.f.y+(e.clientY-d.y)/d.h*100};applyF2(im,f)};
+ im.onpointerup=()=>{if(d){window._dT=Date.now();const f=im._tmp||d.f;d=null;saveF(im,f)}};
+ im.onwheel=e=>{if(!ED||SEL!==im)return;e.preventDefault();const f=getF(im);f.z=Math.max(.5,Math.min(5,f.z*(e.deltaY<0?1.06:1/1.06)));saveF(im,f)}}
+function applyF2(im,f){im._tmp=f;const a=f.r*Math.PI/180,s=f.z*(Math.abs(Math.cos(a))+Math.abs(Math.sin(a)));im.style.transform=`translate(${f.x}%,${f.y}%) rotate(${f.r}deg) scale(${s})`}
+$('#ptb').onclick=e=>{const b=e.target.closest('button');if(!b||!SEL)return;const im=SEL,f=getF(im),a=b.dataset.a;
+ if(a=='zi')f.z=Math.min(5,f.z*1.12);else if(a=='zo')f.z=Math.max(.5,f.z/1.12);else if(a=='rl')f.r-=5;else if(a=='rr')f.r+=5;else if(a=='r90')f.r=(f.r+90)%360;
+ else if(a=='rs'){saveF(im,{...FD});return}else if(a=='rp'){im._rep&&im._rep();return}else if(a=='dn'){selImg(null);return}
+ saveF(im,f)};
+document.addEventListener('click',e=>{if(Date.now()-(window._dT||0)<400)return;if(SEL&&!e.target.closest('#ptb')&&e.target!==SEL)selImg(null)});
+function polBind(f,sc){const im=f.querySelector('img');if(!im)return;const key='p:'+sc+':'+(im.dataset.ph||(im.dataset.j!=null?'x'+im.dataset.j:'main'));
+ const U=()=>parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--u'))||10;
+ const ap=o=>{f.style.translate=(o.x||o.y)?`${o.x*U()}px ${o.y*U()}px`:'';f.style.zIndex=(o.x||o.y)?3:''};
+ let o={x:0,y:0};try{o=Object.assign(o,JSON.parse(g(key)||'{}'))}catch(e){}ap(o);
+ let h=f.querySelector('.mvh');if(!h){h=document.createElement('span');h.className='mvh';h.textContent='✥ Move';h.title='Drag to move this polaroid';f.querySelector('.pi').append(h)}
+ let d=null;h.onpointerdown=e=>{e.preventDefault();e.stopPropagation();h.setPointerCapture(e.pointerId);d={x:e.clientX,y:e.clientY,o:{...o}}};
+ h.onpointermove=e=>{if(!d)return;o={x:d.o.x+(e.clientX-d.x)/U(),y:d.o.y+(e.clientY-d.y)/U()};ap(o)};
+ h.onpointerup=()=>{if(d){d=null;sv(key,JSON.stringify(o));window._dT=Date.now()}};
+ h.onclick=e=>e.stopPropagation();
+ h.ondblclick=()=>{o={x:0,y:0};ap(o);sv(key,JSON.stringify(o))}}
+function bind(root,sc){
+ root.querySelectorAll('[data-k]').forEach(el=>{const k='t:'+sc+':'+el.dataset.k,v=g(k);if(v!=null)el.innerHTML=v;el.contentEditable=ED;el.spellcheck=false;el.oninput=()=>sv(k,el.innerHTML)});
+ root.querySelectorAll('img[data-ph]').forEach(im=>{const k='i:'+sc+':'+im.dataset.ph,v=g(k);if(v)im.src=v;const rp=()=>pick(u=>{sv(k,u);im.src=u});if(im.closest('.pol,.gi'))fxBind(im,'f:'+sc+':'+im.dataset.ph,rp);else im.onclick=()=>{if(ED)rp();else zoom(im.src)}});
+ root.querySelectorAll('figure.pol').forEach(f=>polBind(f,sc))}
+addEventListener('paste',e=>{if(e.target.isContentEditable){e.preventDefault();document.execCommand('insertText',false,e.clipboardData.getData('text/plain'))}});
+function toggleB(){const a=document.activeElement;if(!a||!a.isContentEditable){toast('Click inside the text you want to format, select some words, then press B.');return}
+ const s=getSelection();if(!s.rangeCount||s.isCollapsed){toast('Select some words first, then press B.');return}
+ const r=s.getRangeAt(0),n=r.commonAncestorContainer,el=(n.nodeType==1?n:n.parentElement),em=el.closest('b.em');
+ if(em&&a.contains(em)){const f=document.createDocumentFragment();while(em.firstChild)f.appendChild(em.firstChild);em.replaceWith(f)}
+ else{const b=document.createElement('b');b.className='em';b.appendChild(r.extractContents());r.insertNode(b);s.removeAllRanges();const nr=document.createRange();nr.selectNodeContents(b);s.addRange(nr)}
+ a.dispatchEvent(new Event('input',{bubbles:true}))}
+$$('#fmt button').forEach(b=>{b.onmousedown=e=>e.preventDefault();b.onclick=()=>{if(b.dataset.c=='bold')return toggleB();const a=document.activeElement;if(a&&a.isContentEditable){document.execCommand(b.dataset.c);a.dispatchEvent(new Event('input',{bubbles:true}))}else toast('Click inside the text first.')}});
+addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=='b'&&e.target.isContentEditable){e.preventDefault();toggleB()}},true);
+$('#ed').onclick=()=>{ED=!ED;setTimeout(fitSlide,0);selImg(null);document.body.classList.toggle('editing',ED);$('#ed').textContent=ED?'✓ Done':'✎ Edit';$$('[data-k]').forEach(e=>e.contentEditable=ED);if(ED)toast('Edit mode: click any text to type. Click a photo to zoom, rotate, move or replace it. Use + to add photos.')}
+const syncAll=()=>{if(!ED){renderPlace();renderSlide(si,0)}};
+(async()=>{try{if(!window.claude)return;DB=await claude.use('db');AS=await claude.use('assets');if(DB)DB.collection('edits').onSnapshot(s=>{s.docs.forEach(d=>{const x=d.data();if(x&&x.k&&!(x.k in KV))KV[x.k]=x.v});syncAll()},()=>{})}catch(e){}})();
+
+/* ---------- globe ---------- */
+const PLACES=[
+{id:'lon',num:1,nm:'London',la:51.5,lo:-0.1,t:'London, England',cap:'Tower Bridge with my family',ph:['lon'],b:`<p>Tower Bridge on the Thames, with my family beside me. London is a city where centuries of law and history stand side by side.</p><p><span class="todo">Add what you saw, ate and learned here.</span></p>`},
+{id:'mex',num:2,nm:'Mexico',la:20.7,lo:-88.6,t:'Chichén Itzá, Mexico',cap:'El Castillo, Chichén Itzá',ph:['mex'],pos:'50% 50%',b:`<p>El Castillo, the great pyramid the Maya built at Chichén Itzá.</p><p><span class="todo">Add what you learned about Maya history and culture.</span></p>`},
+{id:'jp',num:3,nm:'Japan',la:35,lo:135.8,t:'Kyoto, Japan',cap:'Fushimi Inari, Kyoto',ph:['jp1','jp2'],pos:'50% 30%',b:`<p>Walking with my family through the orange torii gates of Fushimi Inari, then sitting quietly by the river in Arashiyama.</p><p><span class="todo">Add what Japan taught you about tradition and respect.</span></p>`},
+{id:'dr',num:4,nm:'Dominican Republic',la:18.2,lo:-68.7,t:'Dominican Republic',cap:'Be part of the solution',ph:['dr'],pos:'76% 50%',b:`<p>A beach sign in Spanish read “Sé parte de la solución, no de la contaminación”: be part of the solution, not the pollution. It could be my motto.</p><p><span class="todo">Add what you saw and how you practiced your Spanish.</span></p>`},
+{id:'blr',num:5,nm:'Bangalore',la:13,lo:77.6,dla:14.8,dlo:75.2,t:'Bangalore, India',cap:'Stone elephant guardian',ph:['blr'],pos:'50% 35%',b:`<p>A carved stone elephant guards the doorway, a reminder of the art and history of India.</p><p><span class="todo">Add what Bangalore means to you and your family.</span></p>`},
+{id:'cr',num:6,nm:'Costa Rica',la:9.8,lo:-83.8,t:'Costa Rica',cap:'Where the world feels endless',ph:['cr'],pos:'50% 60%',b:`<p>Looking out over the ocean from a cliff edge.</p><p><span class="todo">Add where you were and what you did in Costa Rica.</span></p>`},
+{id:'hi',num:7,nm:'Hawaii',la:20.8,lo:-156.3,t:'Hawaii',cap:'Dusk over the Pacific',ph:['hi'],pos:'50% 60%',b:`<p>Dusk over the Pacific, the same ocean that connects so many stops on this globe.</p><p><span class="todo">Add what you learned about Hawaiian culture.</span></p>`},
+{id:'dub',num:8,nm:'Dubai',la:25.2,lo:55.27,t:'Dubai, UAE',cap:'City lights from above',ph:['dub'],pos:'50% 35%',b:`<p>The lights of Dubai spread out far below, seen from high in a skyscraper.</p><p><span class="todo">Add what surprised you about Dubai.</span></p>`},
+{id:'ban',num:9,nm:'Banff',la:51.18,lo:-115.57,t:'Banff, Canada',cap:'Banff National Park',ph:['ban'],pos:'50% 45%',b:`<p>Mountains and evergreen forest in Banff National Park, Alberta.</p><p><span class="todo">Add what you hiked or explored here.</span></p>`},
+{id:'sch',num:10,nm:'India school',la:10.96,lo:78.08,dla:9.6,dlo:80.4,sc:1,t:'A School Without Barriers',cap:'Serving homemade food at the school',ph:['s11','s10','s12','s13','s14','s15'],pos:'70% 55%',b:`<p>My family cooked a homemade meal and I helped serve it to the children at a school for deaf and blind kids in India. <span class="todo">Confirm the school name and town: the sign reads Kanmani Trust, Anbalayam.</span></p><p>We sat on the floor together and I saw that care needs no words, sight or sound. It needs someone to show up. Because I volunteered there, I was able to make a real impact.</p><p><b>Why this matters:</b> a meal helps for a day. A lawyer can help for a lifetime by protecting the right to education, accessibility and equal treatment. That is the impact I want to make as an international human rights lawyer.</p>`}];
+let cur=0,pi=0;
+const chips=$('#chips');PLACES.forEach((p,i)=>{const b=document.createElement('button');b.className='chip'+(p.sc?' sc':'');b.textContent=p.num;b.setAttribute('aria-label',p.nm);b.onclick=()=>choose(i);chips.append(b)});
+function choose(i){cur=i;pi=0;fly(PLACES[i]);renderPlace()}
+function renderPlace(){const p=PLACES[cur],sc='p-'+p.id;let ex=[];try{ex=JSON.parse(g('ex:'+sc)||'[]')}catch(e){}
+ const list=[...p.ph.map((k,j)=>g('i:'+sc+':m'+j)||IM[k]),...ex];if(pi>=list.length)pi=0;
+ $('#detail').innerHTML=`<div class="left"><figure class="pol" style="--r:-2.5deg"><div class="pi"><img id="pimg" src="${list[pi]}" alt="${p.nm}" style="aspect-ratio:1/1.08;object-position:${p.pos||'50% 40%'}"></div><figcaption data-k="cap">${p.cap}</figcaption></figure><div class="thumbs">${list.map((s,j)=>`<button class="th${j==pi?' on':''}" data-j="${j}" aria-label="Photo ${j+1}"><img src="${s}" alt=""></button>`).join('')}<button class="th add" id="addph" aria-label="Add a photo">+</button></div><div class="thumbs"><button class="rs rmph" id="rmph">Remove this photo</button></div></div><article class="note"><h3 data-k="t">${p.t}</h3><div class="body" data-k="b">${p.b}</div><button class="rs" id="rsp">↺ Reset this stop</button></article>`;
+ bind($('#detail'),sc);
+ const nd=p.ph.length;$('#rmph').style.display=(ED&&pi>=nd)?'inline-block':'none';
+ {const pim=$('#pimg'),rp=()=>pick(u=>{if(pi<nd)sv('i:'+sc+':m'+pi,u);else{ex[pi-nd]=u;sv('ex:'+sc,JSON.stringify(ex))}renderPlace()});fxBind(pim,'f:'+sc+':'+(pi<nd?'m'+pi:'e'+(pi-nd)),rp)}
+ $$('#detail .th[data-j]').forEach(b=>b.onclick=()=>{pi=+b.dataset.j;renderPlace()});
+ $('#addph').onclick=()=>pick(u=>{ex.push(u);sv('ex:'+sc,JSON.stringify(ex));pi=nd+ex.length-1;renderPlace()});
+ $('#rmph').onclick=()=>{ex.splice(pi-nd,1);sv('ex:'+sc,JSON.stringify(ex));pi=0;renderPlace()};
+ $('#rsp').onclick=()=>{resetScope(sc);pi=0;renderPlace()};
+ [...chips.children].forEach((c,j)=>c.classList.toggle('on',j==cur));$('#gname').textContent=p.num+'. '+p.t}
+const cv=$('#gl'),cx=cv.getContext('2d'),raw=atob(LAND),GW=180,PT=[],D=Math.PI/180;
+for(let r=0;r<90;r++)for(let c=0;c<GW;c++){const b=r*GW+c;if(raw.charCodeAt(b>>3)>>(7-(b&7))&1){const la=(90-(r+.5)*2)*D;PT.push([Math.cos(la),Math.sin(la),(-180+(c+.5)*2)*D])}}
+let S=600,l0=PLACES[0].lo*D,p0=PLACES[0].la*D*.8,dg=0,mv=0,lx=0,ly=0,fl=null,MK=[];
+function size(){const d=devicePixelRatio||1;S=cv.clientWidth||600;cv.width=cv.height=S*d;cx.setTransform(d,0,0,d,0,0)}addEventListener('resize',size);size();
+function fly(n){const t=(n.dlo??n.lo)*D;const dl=((t-l0+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;fl={t0:performance.now(),l:l0,p:p0,dl,tp:Math.max(-.9,Math.min(.9,(n.dla??n.la)*D))}}
+function frame(now){const R=S*.44,c=S/2;cx.clearRect(0,0,S,S);
+ if(fl){const u=Math.min(1,(now-fl.t0)/900),e=u*u*(3-2*u);l0=fl.l+fl.dl*e;p0=fl.p+(fl.tp-fl.p)*e;if(u>=1)fl=null}else if(!dg)l0+=.0012;
+ let gr=cx.createRadialGradient(c,c,R*.9,c,c,R*1.25);gr.addColorStop(0,'#8a6bff55');gr.addColorStop(1,'transparent');cx.fillStyle=gr;cx.fillRect(0,0,S,S);
+ gr=cx.createRadialGradient(c-R*.3,c-R*.3,R*.1,c,c,R);gr.addColorStop(0,'#3b2f8f');gr.addColorStop(1,'#0c0a32');cx.fillStyle=gr;cx.beginPath();cx.arc(c,c,R,0,7);cx.fill();
+ const s0=Math.sin(p0),c0=Math.cos(p0);cx.fillStyle='#ffb3d9';
+ for(const q of PT){const dl=q[2]-l0,cd=Math.cos(dl),zz=s0*q[1]+c0*q[0]*cd;if(zz<=.02)continue;cx.globalAlpha=.3+.7*zz;cx.fillRect(c+R*q[0]*Math.sin(dl)-1.3,c-R*(c0*q[1]-s0*q[0]*cd)-1.3,2.6,2.6)}cx.globalAlpha=1;
+ gr=cx.createRadialGradient(c,c,R*.7,c,c,R);gr.addColorStop(0,'transparent');gr.addColorStop(1,'#0c0a3299');cx.fillStyle=gr;cx.beginPath();cx.arc(c,c,R,0,7);cx.fill();
+ MK=[];cx.textBaseline='middle';
+ PLACES.forEach((n,i)=>{const la=(n.dla??n.la)*D,dl=(n.dlo??n.lo)*D-l0,cd=Math.cos(dl),zz=s0*Math.sin(la)+c0*Math.cos(la)*cd;if(zz<=.08)return;const x=c+R*Math.cos(la)*Math.sin(dl),y=c-R*(c0*Math.sin(la)-s0*Math.cos(la)*cd),col=n.sc?'#6fe3d0':'#f2b134',on=i==cur;
+ const ph=(now/900)%1;cx.strokeStyle=col;cx.lineWidth=2;cx.globalAlpha=1-ph;cx.beginPath();cx.arc(x,y,13+9*ph,0,7);cx.stroke();cx.globalAlpha=1;
+ cx.fillStyle=on?'#fff':col;cx.beginPath();cx.arc(x,y,on?15:13,0,7);cx.fill();cx.strokeStyle='#111';cx.lineWidth=2;cx.stroke();cx.fillStyle='#111';cx.textAlign='center';cx.font='bold 13px Special Elite,monospace';cx.fillText(n.num,x,y+1);
+ cx.fillStyle='#fff';cx.font='12px Special Elite,monospace';cx.textAlign='left';cx.fillText(n.nm,x+19,y);MK.push([x,y,i])});
+ requestAnimationFrame(frame)}requestAnimationFrame(frame);
+const hit=e=>{const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)*(S/r.width),y=(e.clientY-r.top)*(S/r.height);return MK.find(m=>Math.hypot(m[0]-x,m[1]-y)<17)};
+cv.onpointerdown=e=>{dg=1;mv=0;lx=e.clientX;ly=e.clientY;fl=null;cv.setPointerCapture(e.pointerId)};
+cv.onpointermove=e=>{if(dg){const R=S*.44;l0-=(e.clientX-lx)/R;p0=Math.max(-1.1,Math.min(1.1,p0+(e.clientY-ly)/R));mv+=Math.abs(e.clientX-lx)+Math.abs(e.clientY-ly);lx=e.clientX;ly=e.clientY}else cv.style.cursor=hit(e)?'pointer':'grab'};
+cv.onpointerup=e=>{dg=0;if(mv<6){const h=hit(e);if(h)choose(h[2])}};
+
+/* ---------- in-flight screen: slides ---------- */
+const POL=(k,src,cap,o={})=>`<figure class="pol" style="--r:${o.r??-2}deg;${o.w?'width:'+o.w+';':''}"><div class="pi"><img data-ph="${k}" src="${src}" alt="${(o.alt||cap).replace(/"/g,'')}" style="aspect-ratio:${o.ar||'4/5'};object-position:${o.pos||'50% 40%'}"></div><figcaption data-k="cap-${k}">${cap}</figcaption></figure>`;
+const COS=[
+{s:'L',t:4,c:'#2e5eaa',ry:61,rh:44,h:'Education',sm:1,x:'Weighted GPA 4.4811, rank 77 of 573: law schools weigh GPA heavily. AP Scholar with National Distinction and AP Capstone candidate. <b>AP scores:</b> 5 in World History, Psychology and U.S. History; 4 in Calculus AB, Environmental Science, Seminar, English Language, European History and Precalculus. Coming in May 2027: Research, Macroeconomics, Statistics, Literature and Calculus BC.'},
+{s:'L',t:35,c:'#2f8f5b',ry:208,rh:46,h:'Clerk of Courts intern',x:'I observed civil, criminal, family and teen court and interviewed a prosecutor and a defense attorney. Lawyers must know how courts really work.'},
+{s:'L',t:66,c:'#c98a00',ry:342,rh:37,h:'Awards',x:'6th at districts in FBLA Business Law; 1st in DECA Innovation Plan. Contracts and business law sit at the heart of business and human rights cases.'},
+{s:'R',t:4,c:'#e4572e',ry:127,rh:76,h:'RoboThink assistant',x:'I led groups of 10 to 20 students plus one-on-one help. Lawyers must explain hard ideas simply to every audience.'},
+{s:'R',t:35,c:'#8a4fbf',ry:282,rh:54,h:'Youth &amp; Government',x:'Top 4 finalist in the Judicial Program. I researched Grants Pass v. Johnson and argued both sides: research, writing and oral argument.'},
+{s:'R',t:66,c:'#d6336c',ry:389,rh:19,h:'Languages and leadership',x:'English, Tamil, Spanish and World Cultural Society president. International lawyers work across languages and cultures.'}];
+function resumeHalf(y0,y1,items){const k=1.5,H=(y1-y0)*k,W=386.4*k,L0=500-W/2;let svg='',co='';
+ items.forEach(([i,side,t,h])=>{const o=COS[i],L=side=='L',rx0=500+(326-500)*k,rx1=500+(672-500)*k,ry=(o.ry-y0)*k,rh=o.rh*k,yt=ry+rh/2,yc=(t+h/2)/100*H,x0=L?rx0:rx1,xe=L?219:781,tip=L?207:793,sx=L?x0-16:x0+16,ex=L?xe+12:xe-12;
+ svg+=`<rect x="${rx0}" y="${ry}" width="${rx1-rx0}" height="${rh}" fill="${o.c}" fill-opacity=".16" stroke="${o.c}" stroke-width="2" rx="3"/><path d="M${x0} ${yt} C${sx} ${yt} ${ex} ${yc} ${xe} ${yc}" fill="none" stroke="${o.c}" stroke-width="2.4"/><circle cx="${x0}" cy="${yt}" r="4" fill="${o.c}"/><polygon points="${tip},${yc} ${xe},${yc-6} ${xe},${yc+6}" fill="${o.c}"/>`;
+ co+=`<div class="co${o.sm?' sm':''}" style="--c:${o.c};left:${L?0:79.5}%;width:20.5%;top:${t}%;height:${h}%;transform:rotate(${L?-.6:.6}deg)"><b data-k="h${i}">${o.h}</b><span data-k="x${i}">${o.x}</span></div>`});
+ return `<div class="rstage" style="aspect-ratio:1000/${H.toFixed(1)}"><div class="rcrop" style="left:${L0/10}%;width:${W/10}%"><img class="rimg" data-ph="resume" src="${IM.resume}" alt="Nandhana's resume" style="top:${(-y0*k/H*100).toFixed(2)}%;height:${(500*k/H*100).toFixed(2)}%"></div>${co}<svg viewBox="0 0 1000 ${H.toFixed(1)}" aria-hidden="true">${svg}</svg></div>`}
+const SL=[
+{id:'welcome',tag:'Start here',title:'Meet Nandhana',html:()=>`<div class="two" style="--a:1.7fr;--b:1fr"><div class="txt"><p class="lead" data-k="intro">From arguing appellate cases in the Florida chambers to analyzing cross-border policy, my portfolio follows my path to becoming an international lawyer.</p><p data-k="who">I am a senior at Creekside High School in St. Johns, Florida, and the daughter of Tamil immigrants. I speak Tamil, English and Spanish, and I want to protect human rights across borders.</p><h3>Today’s flight plan</h3><ol data-k="plan"><li><b>Resume review</b> with visual aids</li><li><b>School and work experience</b> that prepared me</li><li><b>Career research</b>: the job, the path, the pay and the obstacles</li><li><b>Skills, awards and certifications</b> that match the career</li></ol><p class="sm" data-k="then">Then my story: where I come from, where I have traveled and why I want to change the world.</p></div><div class="pc">${POL('n1',IM.n1,'Florida YMCA Youth &amp; Government',{ar:'1/1',pos:'50% 40%'})}<div class="bigstamp" aria-hidden="true"><div class="in"><span>AIR MAIL</span><span class="pl">✈</span><b>FBLA</b><span>2026</span></div></div><div class="pm" aria-hidden="true">JAX FL<br>NOV 2026<br>PORTFOLIO<br>AIRLINES</div></div></div>`},
+{id:'resume1',tag:'1 · Resume review',title:'Resume, part 1: education and experience',html:()=>resumeHalf(2,270,[[0,'L',1,66],[1,'L',69,30],[3,'R',18,62]])+`<p class="hintz" style="text-align:center;margin:0">Click the resume to enlarge it. Next: leadership, skills and awards.</p>`},
+{id:'resume2',tag:'1 · Resume review',title:'Resume, part 2: leadership, skills and awards',html:()=>resumeHalf(262,490,[[4,'L',6,70],[2,'R',2,47],[5,'R',52,47]])+`<p class="hintz" style="text-align:center;margin:0">Click the resume to enlarge it.</p>`},
+{id:'career',tag:'3 · Career research',title:'Becoming an international lawyer',html:()=>`<div class="flow"><div class="fc" style="left:0%;top:0%;width:24%;height:28%"><h4>Step 1:</h4><p data-k="a">Get an Undergraduate Degree</p><p data-k="b">Intern at Local Law Offices &amp; Gain Experience</p><p data-k="c">Study Abroad and learn about different opportunities. Look into WorldPackers and GIVE Volunteers</p></div><div class="fc" style="left:25%;top:13%;width:24%;height:24%"><h4>Step 2:</h4><p data-k="a">Take the LSAT: scores range from 120 to 180<sup>5</sup></p><p data-k="b">Law schools look into GPA &amp; LSAT scores</p></div><div class="fc" style="left:50%;top:26%;width:24%;height:22%"><h4>Step 3:</h4><p data-k="a">Join a Law School<sup>5</sup></p><p data-k="b"><b>1st Year:</b> Designated courses everyone takes</p></div><div class="fc" style="left:75%;top:45%;width:25%;height:22%"><h4>Step 4:</h4><p data-k="a"><b>STUDY FOR THE BAR</b></p><p data-k="b">Pass the bar and find a job</p></div><div class="fc" style="left:0%;top:34%;width:23%;height:30%"><ul data-k="a"><li>Whether the class is related to the practice area they intend to pursue</li><li>Whether the class represents a practice area they’re considering pursuing</li><li>Whether the class covers a bar exam subject</li></ul><p data-k="b" class="cap">INTERNATIONAL HUMANITARIAN LAW<sup>4</sup></p></div><div class="fc" style="left:12%;top:72%;width:27%;height:26%"><h4>2nd Year:</h4><p data-k="a">Pick your own classes, increase participation in extracurriculars, mock trial and summer internships<sup>5</sup></p></div><div class="fc" style="left:40%;top:76%;width:12%;height:22%"><p class="dk" data-k="a"><b>INTERNSHIP:</b> United Nations Internship, working as a Legal Aid with Lawyers Without Borders<sup>1</sup></p></div><div class="fc" style="left:53%;top:72%;width:28%;height:26%"><h4>Third Year:</h4><p data-k="a">Seminar classes of your own choice and a <b>LEGAL CLINIC</b>, a program through the law school that lets you receive credit for real legal work for real clients (usually pro bono)<sup>5</sup></p></div><div class="fc" style="left:75%;top:0%;width:25%;height:41%"><h4>JOBS</h4><ul data-k="a"><li>Large international organizations, such as the United Nations and its agencies<sup>2</sup><sup>3</sup></li></ul><p data-k="b"><b>United Nations jobs:</b> <i>Human Rights Officer, Legal Advisor, Law Expert, Legal Officer</i></p><ul data-k="c"><li><b>Salary:</b> see next slide</li><li><b>Long-term outlook:</b> growing faster than average</li><li><b>Responsibilities:</b> research, advise, argue, write</li></ul></div><svg viewBox="0 0 1000 400" aria-hidden="true"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2b1d5e"/></marker></defs><line x1="240" y1="71" x2="250" y2="88" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/><line x1="490" y1="120" x2="500" y2="144" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/><line x1="740" y1="168" x2="780" y2="180" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/><line x1="600" y1="191" x2="300" y2="288" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/><line x1="390" y1="340" x2="400" y2="340" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/><line x1="520" y1="340" x2="530" y2="340" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/><line x1="750" y1="288" x2="840" y2="267" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/><line x1="180" y1="288" x2="120" y2="255" stroke="#2b1d5e" stroke-width="2" marker-end="url(#ah)"/></svg></div><div class="refs" data-k="refs"><b>Sources:</b> [1] United Nations IRMCT, “Legal internships,” irmct.org. [2] ISDE, “What does an international lawyer do and what skills do they need?” isde.es. [3] Chambers and Partners, “Business &amp; Human Rights Law, Global Market Leaders, Global,” chambers.com. [4] Harvard Law School, Bernard Koteen Office, “Lifestyles and International Work,” hls.harvard.edu. [5] Law School Admission Council, “What To Expect in Law School,” lsac.org.</div>`},
+{id:'outlook',tag:'3 · Career research  ·  4 · Skills',title:'Pay, obstacles and my skills',html:()=>`<div class="two cmp" style="--a:1fr;--b:1.3fr"><div style="display:grid;gap:calc(var(--u)*1.2)"><div class="stats"><div class="stat"><b>$159,670</b><span data-k="a1">median pay for U.S. lawyers, May 2025</span></div><div class="stat"><b>5%</b><span data-k="a2">job growth 2025 to 2035, faster than average, with about 28,700 openings a year</span></div><div class="stat"><b>7 years</b><span data-k="a3">of study after high school: 4 college, 3 law school</span></div><div class="stat"><b>$130,000</b><span data-k="a4">average law school debt</span></div></div><div class="txt"><h3>Challenges I plan for</h3><ul data-k="chal"><li><b>Cost:</b> debt averages about $130,000, so I will apply for scholarships.</li><li><b>Competition:</b> few people start in a UN professional post. Many begin in short roles such as UN Volunteer (6 to 12 months).</li><li><b>Pay:</b> entry-level UN salaries are reported at roughly $37,000 to $80,000, below the lawyer median.</li><li><b>Hard places and hard stories:</b> field offices can be dangerous and the work is heavy.</li></ul></div></div><div style="display:grid;gap:calc(var(--u)*1.2)"><table class="tbl"><thead><tr><th>My skill or award</th><th>Why an international lawyer needs it</th></tr></thead><tbody><tr><td data-k="k1">English, Tamil and Spanish</td><td data-k="w1">Clients, witnesses and treaties cross languages, and speaking someone’s language builds trust fast.</td></tr><tr><td data-k="k2">FBLA Business Law, 6th at districts</td><td data-k="w2">Contracts, corporate accountability and legal terms are core to business and human rights law.</td></tr><tr><td data-k="k3">Appellate argument: Top 4 finalist in the Judicial Program</td><td data-k="w3">Lawyers research precedent and argue both sides before judges.</td></tr><tr><td data-k="k4">DECA Innovation Plan 1st and FBLA Intro to Marketing 1st at districts</td><td data-k="w4">Building a clear, persuasive case from research.</td></tr><tr><td data-k="k6">AP Scholar with National Distinction; AP Capstone Diploma candidate</td><td data-k="w6">Law school reading and writing loads are heavy, and research and strong exam results show I am ready for them.</td></tr><tr><td data-k="k5">Adobe Premiere Pro, Python, JavaScript</td><td data-k="w5">Documenting evidence and telling clients’ stories clearly.</td></tr></tbody></table><div class="pc prow">${POL('un',IM.egy,'The United Nations, 1945',{ar:'2/1',pos:'50% 60%',r:-2,w:'calc(var(--u)*15)'})}${POL('skp',IM.n4,'Teams and awards',{ar:'2/1',pos:'80% 40%',r:2,w:'calc(var(--u)*15)'})}</div></div></div><p class="src" data-k="src">Sources: U.S. Bureau of Labor Statistics, Occupational Outlook Handbook: Lawyers. Bankrate, average law school debt. HumanRightsCareers.com, working for the UN (figures may be dated). The Colleges of Law, “Exploring 5 of the Highest-Paid Types of Lawyers,” Feb. 19, 2024 (collegesoflaw.edu).</p>`},
+{id:'clerk',tag:'2 · School and work experience',title:'Inside the courthouse',html:()=>`<div class="two" style="--a:1.2fr;--b:1fr"><div class="txt"><h3>How it shaped my goal</h3><p data-k="why">Hearing from both the prosecutor and the defense attorney showed me both sides of the justice system. It confirmed my interest in law and taught me how courts, clerks and lawyers work together.</p><h3>St. Johns County Clerk of Courts intern</h3><ul data-k="did"><li>Rotated through Trial Courts, Public Affairs, Finance, HR, IT and the Inspector General</li><li>Observed civil, criminal, family and teen court trials</li><li>Interviewed the County Prosecutor, a Defense Attorney and the Clerk of the Circuit Court</li><li>Met the Attorney General, the Sheriff, a Circuit Court Judge and local lawyers</li><li>Visited the Seventh Judicial Circuit Office of the State Attorney and heard how prosecutors uphold justice</li><li>Supported Passports, Traffic and Marriage Services</li></ul></div><div class="pc">${POL('meet',IM.meet,'Meeting the Public Defender',{ar:'3/2',pos:'30% 50%',r:2,w:'calc(var(--u)*21)'})}${POL('sa',IM.sa,'State Attorney’s Office visit',{ar:'3/2',pos:'50% 45%',r:-2,w:'calc(var(--u)*21)'})}</div></div>`},
+{id:'school',tag:'2 · School and work experience',title:'School, work and leadership',html:()=>`<div class="two" style="--a:2.2fr;--b:.8fr"><div class="rows"><div class="row"><b>AP Capstone and dual enrollment</b><span data-k="r1">AP Seminar and Research, Economics, Psychology, Statistics, Calculus BC, plus college classes at Saint Johns River State College.</span></div><div class="row"><b>RoboThink teaching assistant</b><span data-k="r2">Led groups of 10 to 20 students ages 5 to 12; explained hard ideas simply.</span></div><div class="row"><b>World Cultural Society president</b><span data-k="r3">Hosted Asian, Black and Desi student unions and monthly multicultural events.</span></div><div class="row"><b>Model UN and World Affairs</b><span data-k="r4">Wrote position papers on many countries; 2 state-level conferences at UCF.</span></div><div class="row"><b>Law Society</b><span data-k="r5">Talked with family, corporate and international lawyers.</span></div><div class="row"><b>FYLH and Kim’s Open Door</b><span data-k="r6">Raised $3,000+ for free healthcare at Sanjivani Hospital in India; taught refugee children ages 8 to 13.</span></div></div><div class="pc">${POL('teach',IM.teach,'Teaching and volunteering',{ar:'1/1.1',pos:'50% 40%'})}</div></div><p class="txt" style="margin:0" data-k="tie"><b>What it adds up to:</b> research, public speaking, leadership and service, the everyday tools of a human rights lawyer.</p><div class="hrs"><b data-k="hn">353</b><span data-k="ht">community service hours logged as a volunteer, with 0 paid. Service is the thread through everything above.</span></div>`},
+{id:'campaign',tag:'2 · School and work experience',title:'The Grow a Garden campaign',html:()=>`<div class="two" style="--a:1.15fr;--b:1fr"><div class="txt"><p data-k="c1">Grow a Garden was the game everyone was talking about, so I built my campaign for Commissioner of Agriculture around it. My posts turned me into a “Limited Edition Candidate” in a game shop, with a bee, a bunny and a sunflower as mascots.</p><p data-k="c2">It worked as recruitment: the game made people stop scrolling, follow my page and join my team before voting began.</p><p data-k="c3"><b>What I ran on:</b> climate change, farmer assistance, access to education, poverty and equality. These are the same causes I want to defend as a human rights lawyer.</p><p data-k="c4">I lost the election, but I learned to step out of my comfort zone and deliver an impactful speech.</p></div><div class="grid2"><div class="gi"><img data-ph="camp" src="${IM.camp}" alt="Vote Nandhana campaign post"></div><div class="gi"><img data-ph="cp1" src="${IM.cp1}" alt="Grow a Commissioner of Agriculture post"></div><div class="gi"><img data-ph="cp2" src="${IM.cp2}" alt="Limited Edition Candidate game-shop post"></div><div class="gi"><img data-ph="cp3" src="${IM.cp3}" alt="Why should you vote for Nandhana post"></div></div></div>`},
+{id:'yig',tag:'2 · School and work experience',title:'Youth in Government',html:()=>`<div class="two" style="--a:1fr;--b:1.35fr"><div class="txt yt" data-k="essay"><p>Even with 353 hours of community service, standing before 27 unfamiliar faces at my first Youth in Government conference, my heart raced as I presented my mock bill on carbon footprints. As questions were asked, a switch flipped; my hours of preparation kicked in. I became someone new, my shaking voice replaced with commanding authority.</p><p>Seeking a new challenge for my second year, I opted for a mock Supreme Court appellate lawyer. What students spend 3 years in law school mastering, I was trying to understand using the internet in 6 months. Luckily, I also had other sources: our three-person team, the lawyer sponsors and the blunt, relentless feedback from senior members. It was tough seeing our arguments get torn apart, but it made us and our arguments tougher and stronger in the end. At the state level, our arguments and responses to questions were pragmatic, polished, and creative. That night, results came and we were one of only 4 teams out of 30 chosen for the next round.</p><p>This confidence is why I decided to start my campaign as commissioner of agriculture in the executive branch. I planned, networked and executed the campaign successfully. Although I lost the election, the same girl who stuttered on her words learned to get out of her comfort zone and deliver an impactful speech. All these experiences that Youth in Government gave me made me a new person, someone who, two years ago, I wouldn’t have believed I could become.</p></div><div class="pgrid yg3">${POL('n3',IM.n3,'Arguing at the podium',{ar:'4/3',pos:'50% 30%',r:-2})}${POL('n4',IM.n4,'My team',{ar:'4/3',pos:'85% 40%',r:2})}${POL('y6',IM.y6,'Name placards, 68th State Assembly',{ar:'4/3',pos:'50% 40%',r:-2})}${POL('y2',IM.y2,'Committee room huddle',{ar:'4/3',pos:'50% 50%',r:2})}${POL('y1',IM.y1,'Banquet with fellow delegates',{ar:'4/3',pos:'50% 50%',r:-2})}${POL('y3',IM.y3,'A throwback photo',{ar:'4/3',pos:'50% 40%',r:2})}${POL('y4',IM.y4,'Senate seal',{ar:'4/3',pos:'50% 40%',r:-2})}${POL('y5',IM.y5,'Florida Capitol rotunda',{ar:'4/3',pos:'50% 40%',r:2})}${POL('grp',IM.grp,'Supreme Court chamber',{ar:'4/3',pos:'50% 40%',r:-2})}</div></div>`},
+{id:'identity',tag:'My story',title:'Daughter of Tamil immigrants',html:()=>`<div class="two" style="--a:1.5fr;--b:1fr"><div class="txt"><h3>வணக்கம் · Vanakkam</h3><p data-k="i1">My parents came from South India and built a life in America. I speak Tamil at home and English everywhere else, and I also speak, read and write Spanish. <span class="todo">Add one memory from home: a festival, a meal, a phrase.</span></p><p data-k="i2">Watching my parents learn new systems, new rules and new words showed me how hard life is when nothing is written with you in mind. Being bilingual gave me empathy for people far from home and made me curious to meet the world in its own languages. That curiosity is why I travel.</p><p data-k="i3">The smell of masala chai and incense at home made no sense to my American friends, and football games and big pretzels made no sense to my cousins in India. I did not pick between the two worlds, I combined them, and it keeps me open to other points of view. I play the bansuri, a classical Indian bamboo flute, at cultural festivals, and every year I return to my farm in India.</p></div><div class="pgrid id3">${POL('jp1',IM.jp1,'My family',{ar:'3/4',pos:'50% 30%',r:-2})}${POL('i1',IM.i1,'My favorite goat',{ar:'3/4',pos:'50% 40%',r:2})}${POL('i2',IM.i2,'A temple visit',{ar:'3/4',pos:'30% 40%',r:-2})}${POL('i3',IM.i3,'Friends in India',{ar:'3/4',pos:'50% 40%',r:2})}${POL('i4',IM.i4,'Festival day',{ar:'3/4',pos:'50% 40%',r:-2})}</div></div>`},
+{id:'world',tag:'My why',title:'A wide world, and an unequal one',html:()=>`<div class="txt"><p data-k="w1">Ten stops so far: London, Mexico, Japan, the Dominican Republic, Bangalore, Costa Rica, Hawaii, Dubai, Banff and a school in India. Each showed me how many ways there are to live. Each also showed me who gets left behind.</p><p data-k="w2"><b>At a school for deaf and blind children in India,</b> my family’s homemade food reached children who wait on others for access. Care needs no words, sight or sound, only someone who shows up. A lawyer can make that last by defending education, accessibility and equal treatment, the rights the UN Convention on the Rights of Persons with Disabilities protects.</p></div><div class="three" style="--a:1fr;--b:1fr;--c:1fr">${POL('w1',IM.s11,'Dinner with the children',{ar:'6/5',pos:'70% 55%',r:-2})}${POL('w2',IM.s15,'The school’s art wall',{ar:'6/5',pos:'50% 70%',r:1.5})}${POL('w3',IM.dr,'Be part of the solution',{ar:'6/5',pos:'76% 50%',r:2})}</div>`},
+{id:'thanks',tag:'Questions?',title:'Thank you!',html:()=>`<div class="two" style="--a:1.7fr;--b:.9fr"><div class="txt" style="font-size:calc(var(--u)*var(--t,1)*1.12)"><p class="lead" data-k="th">I am happy to answer your questions.</p><h3>Sources</h3><ul data-k="srcs"><li>U.S. Bureau of Labor Statistics, Occupational Outlook Handbook: Lawyers (bls.gov/ooh/legal/lawyers.htm)</li><li>Bankrate, Average law school debt (bankrate.com)</li><li>HumanRightsCareers.com, Advantages and disadvantages of working for the UN</li><li>ISDE, What does an international lawyer do and what skills do they need (isde.es)</li><li>Harvard Law School, Bernard Koteen Office: Lifestyles and International Work (hls.harvard.edu)</li><li>LSAC, What to expect in law school (lsac.org)</li><li>UN IRMCT, Legal internships (irmct.org)</li><li>Chambers and Partners, Business &amp; Human Rights Law rankings (chambers.com)</li><li>Photos: my own and my Youth in Government delegation’s; UN photo card from the Story of America series, 1979</li></ul></div><div class="pc">${POL('th',IM.n1,'Nandhana Neminathan, Creekside High School',{pos:'50% 35%'})}</div></div>`}];
+{const ord=['welcome','identity','resume1','resume2','clerk','school','yig','campaign','career','outlook','world','thanks'];SL.sort((a,b)=>ord.indexOf(a.id)-ord.indexOf(b.id))}
+let si=0;const slideEl=$('#slide');
+(function clk(){const d=new Date();$('#clk').textContent=d.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});setTimeout(clk,20000)})();
+function fit(){const m=innerWidth<=760,s=$('#scr');document.documentElement.style.setProperty('--u',(m?9.5:0.9*Math.min(s.clientWidth/100,s.clientHeight/62.5))+'px')}
+addEventListener('resize',()=>{fit();fitSlide()});
+let tsAll=false;
+const tsKey=id=>'ts:s-'+id+':size';
+function tsGet(){const s=g(tsKey(SL[si].id)),a=g('ts:all:size');return s!=null?+s:(a!=null?+a:null)}
+function tsSet(v){v=Math.max(.6,Math.min(1.8,Math.round(v*100)/100));if(tsAll){sv('ts:all:size',String(v));SL.forEach(s=>{if(g(tsKey(s.id))!=null)rmk(tsKey(s.id))})}else sv(tsKey(SL[si].id),String(v));fitSlide()}
+function fitSlide(){const el=slideEl.querySelector('.sl');if(!el)return;el.style.removeProperty('--u');const ts=tsGet();el.style.setProperty('--t',ts==null?1:ts);if(innerWidth<=760||ts!=null&&ts!=1)return;
+ const base=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--u'))||10;let lo=1,hi=1.22;
+ for(let i=0;i<9;i++){const m=(lo+hi)/2;el.style.setProperty('--u',base*m+'px');if(el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)lo=m;else hi=m}
+ el.style.setProperty('--u',(base*lo)+'px')}
+function renderSlide(i,anim=1){si=(i+SL.length)%SL.length;const s=SL[si];
+ slideEl.innerHTML=`<div class="sl" ${anim?'':'style="animation:none"'}><header class="sh"><h2 class="st" data-k="title">${s.title}</h2><span class="tagc">${s.tag}</span></header><div class="sb">${s.html()}</div><div class="sf"><button class="rs" id="rss">↺ Reset this slide</button> <button class="rs" id="adx">+ Add a photo</button> <button class="rs" id="rmx">Remove last added photo</button></div></div>`;
+ bind(slideEl,'s-'+s.id);
+ {const sc='s-'+s.id;let ex=[];try{ex=JSON.parse(g('ex:'+sc)||'[]')}catch(e){}
+ if(ex.length){const d=document.createElement('div');d.className='xr';d.innerHTML=ex.map((u,j)=>`<figure class="pol" style="--r:${j%2?2:-2}deg"><div class="pi"><img src="${u}" data-j="${j}" alt="Added photo" style="aspect-ratio:4/3"></div><button class="xdel" data-j="${j}" aria-label="Delete this photo">✕ Delete</button><figcaption data-k="xc${j}">Caption</figcaption></figure>`).join('');slideEl.querySelector('.sb').append(d);bind(d,sc);d.querySelectorAll('.xdel').forEach(x=>x.onclick=e=>{e.stopPropagation();ex.splice(+x.dataset.j,1);sv('ex:'+sc,JSON.stringify(ex));for(let k=0;k<12;k++)rmk('t:'+sc+':xc'+k);renderSlide(si,0)});
+  d.querySelectorAll('img').forEach(im=>fxBind(im,'f:'+sc+':x'+im.dataset.j,()=>pick(u=>{ex[+im.dataset.j]=u;sv('ex:'+sc,JSON.stringify(ex));renderSlide(si,0)})))}
+ $('#adx').onclick=()=>pick(u=>{ex.push(u);sv('ex:'+sc,JSON.stringify(ex));renderSlide(si,0)});
+ $('#rmx').onclick=()=>{ex.pop();sv('ex:'+sc,JSON.stringify(ex));renderSlide(si,0)}}
+$('#rss').onclick=()=>{resetScope('s-'+s.id);renderSlide(si,0)};fitSlide();
+ const pct=SL.length>1?si/(SL.length-1)*100:0;$('#trki').style.width=pct+'%';$('#pln').style.left=pct+'%';$('#cnt').textContent=(si+1)+' / '+SL.length;$('#nowp').textContent=s.tag;
+ $$('#menu button').forEach((b,j)=>b.classList.toggle('on',j==si))}
+$('#menu').innerHTML=SL.map((s,i)=>`<button data-i="${i}">${i+1}. ${s.title}<small>${s.tag}</small></button>`).join('');
+$$('#menu button').forEach(b=>b.onclick=()=>{$('#menu').classList.remove('show');renderSlide(+b.dataset.i)});
+$('#tsm').onclick=()=>tsSet((tsGet()??1)-.08);$('#tsp').onclick=()=>tsSet((tsGet()??1)+.08);
+$('#tsa').onclick=()=>{tsAll=!tsAll;$('#tsa').textContent=tsAll?'All slides':'This slide'};
+$('#bmenu').onclick=()=>$('#menu').classList.toggle('show');
+$('#bpv').onclick=()=>{$('#menu').classList.remove('show');renderSlide(si-1)};$('#bnx').onclick=()=>{$('#menu').classList.remove('show');renderSlide(si+1)};
+function pmode(on){document.body.classList.toggle('pmode',on);$('#bpm').textContent=on?'Exit':'Present';setTimeout(fit,30)}
+$('#bpm').onclick=()=>pmode(!document.body.classList.contains('pmode'));
+let cabinOn=false;new IntersectionObserver(e=>cabinOn=e[0].intersectionRatio>.35,{threshold:[0,.35,.6]}).observe($('#cabin'));
+addEventListener('keydown',e=>{if(e.target.isContentEditable)return;if(e.key=='Escape'){$('#lb').classList.remove('show');$('#menu').classList.remove('show');if(document.body.classList.contains('pmode'))pmode(false)}
+ if(!cabinOn&&!document.body.classList.contains('pmode'))return;if(e.key=='ArrowRight')renderSlide(si+1);if(e.key=='ArrowLeft')renderSlide(si-1)});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>fitSlide());
+fit();renderSlide(0,0);choose(0);fl=null;l0=PLACES[0].lo*D;p0=PLACES[0].la*D*.8;
+</script>
+
+</body>
+</html>
